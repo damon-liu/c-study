@@ -19,7 +19,7 @@
     "configurations": [
         {
             "name": "Win64",
-            "compilerPath": "D:\\tool\\c\\mingw64\\bin\\g++.exe",
+            "compilerPath": "D:\\software\\c\\mingw64\\bin\\g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-gcc-x64",

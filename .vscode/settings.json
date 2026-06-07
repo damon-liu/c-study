@@ -2,7 +2,14 @@
     "code-runner.executorMap": {
         "cpp": "cd $dir && g++ '$fileName' -o '$fileNameWithoutExt' -std=c++17 -Wall -Wpedantic -Wextra && echo 'compilation ends.' && ./'$fileNameWithoutExt'",
         "c": "cd $dir && gcc '$fileName' -o '$fileNameWithoutExt' -std=c17 -Wall -Wpedantic -Wextra && echo 'compilation ends.' && ./'$fileNameWithoutExt'"
-    }
+    },
+     "terminal.integrated.profiles.windows": {
+        "Command Prompt": {
+            "path": "cmd.exe",
+            "args": ["/k", "chcp 65001"]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Command Prompt"
 }
 
 // {
