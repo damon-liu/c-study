@@ -1,0 +1,3 @@
+D:/project/damon/C/Study/Demo1/build/CMakeFiles/main.dir
+D:/project/damon/C/Study/Demo1/build/CMakeFiles/edit_cache.dir
+D:/project/damon/C/Study/Demo1/build/CMakeFiles/rebuild_cache.dir

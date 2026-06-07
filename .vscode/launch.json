@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "g++.exe - 生成和调试活动文件",
+            "type": "cppvsdbg", // Windows调试器，Linux/Mac为"cppvsdbg"改为"lldb"
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe", // 要调试的可执行文件路径
+            "args": [], // 程序运行参数（无则空）
+            "stopAtEntry": false, // 是否在程序入口（main函数）自动暂停
+            "cwd": "${fileDirname}", // 工作目录
+            "environment": [],
+            "externalConsole": false, // 是否弹出外部终端（建议false，用VS Code内置终端）
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe", // 调试器路径（MinGW已配环境变量则无需改）
+            "preLaunchTask": "C/C++: g++.exe 生成活动文件", // 调试前先执行的编译任务（必须和tasks.json里的任务名一致）
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
