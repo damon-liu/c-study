@@ -1,22 +1,46 @@
 
-# 最低 CMake 版本要求
+# ============================================
+# C-Study 项目构建配置
+# ============================================
+
 cmake_minimum_required(VERSION 3.10)
-# 项目名称
-project(demo1)
-# 设置 C++ 标准（与代码匹配）
+project(demo1 VERSION 1.0.0 LANGUAGES CXX)
+
+# C++ 标准
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 生成可执行文件：main（对应源码文件）
-add_executable(main hello.cpp main.cpp)
+# 默认 Debug 构建（可通过 -DCMAKE_BUILD_TYPE=Release 覆盖）
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+endif()
 
-# 强制使用 UTF-8 编码（解决中文乱码）
+# ============================================
+# 可执行文件
+# ============================================
+add_executable(main
+    src/hello.cpp
+    src/main.cpp
+)
+
+# 头文件搜索路径
+target_include_directories(main PRIVATE src)
+
+# ============================================
+# 编译器标志
+# ============================================
 if(MSVC)
     target_compile_options(main PRIVATE /utf-8)
 else()
-    # MinGW/GCC: 确保执行字符集为 UTF-8
     target_compile_options(main PRIVATE -fexec-charset=UTF-8)
 endif()
 
-# 关键：开启 Debug 模式，生成调试符号（必须！）
-set(CMAKE_BUILD_TYPE Debug)
+# ============================================
+# 编译后复制到 deploy/ (用于 Docker 部署)
+# ============================================
+add_custom_command(TARGET main POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:main>"
+        "${CMAKE_SOURCE_DIR}/deploy/$<TARGET_FILE_NAME:main>"
+    COMMENT "Copying $<TARGET_FILE_NAME:main> to deploy/"
+)

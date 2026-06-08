@@ -2,9 +2,9 @@
 # Linux x86_64 交叉编译工具链文件 (基于 Zig)
 #
 # 用法:
-#   export ZIG_PATH=/d/software/c++/lib/zig/zig.exe
+#   export ZIG_PATH=/d/software/c++/lib/zig/zig-windows-x86_64-0.13.0/zig.exe
 #   cmake -B build_linux -G "MinGW Makefiles" \
-#         -DCMAKE_TOOLCHAIN_FILE=toolchain-linux-x64.cmake
+#         -DCMAKE_TOOLCHAIN_FILE=cmake/toolchains/linux-x64.cmake
 #   cmake --build build_linux
 # ============================================
 
