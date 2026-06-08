@@ -38,7 +38,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/CMake/share/cmake-4.3/Modules/Platform/Windows-windres.cmake"
   "C:/Program Files/CMake/share/cmake-4.3/Modules/Platform/Windows.cmake"
   "C:/Program Files/CMake/share/cmake-4.3/Modules/Platform/WindowsPaths.cmake"
-  "D:/project/damon/C/Study/Demo1/CMakeLists.txt"
+  "D:/project/damon/C/Study/c-study/CMakeLists.txt"
   "CMakeFiles/4.3.3/CMakeCCompiler.cmake"
   "CMakeFiles/4.3.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.3.3/CMakeRCCompiler.cmake"

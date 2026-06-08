@@ -1,4 +1,5 @@
-CMakeFiles/main.dir/main.cpp.obj: D:\project\damon\C\Study\Demo1\main.cpp \
+CMakeFiles/main.dir/main.cpp.obj: \
+ D:\project\damon\C\Study\c-study\main.cpp \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/vector \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/requires_hosted.h \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -146,4 +147,4 @@ CMakeFiles/main.dir/main.cpp.obj: D:\project\damon\C\Study\Demo1\main.cpp \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/ostream.tcc \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/istream \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/istream.tcc \
- D:\project\damon\C\Study\Demo1\hello.hpp
+ D:\project\damon\C\Study\c-study\hello.hpp

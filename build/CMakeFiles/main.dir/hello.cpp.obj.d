@@ -1,6 +1,6 @@
 CMakeFiles/main.dir/hello.cpp.obj: \
- D:\project\damon\C\Study\Demo1\hello.cpp \
- D:\project\damon\C\Study\Demo1\hello.hpp \
+ D:\project\damon\C\Study\c-study\hello.cpp \
+ D:\project\damon\C\Study\c-study\hello.hpp \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/string \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/bits/requires_hosted.h \
  D:/tool/c/mingw64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \

@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"D:/project/damon/C/Study/Demo1/build/cmake_install.cmake"
+		"D:/project/damon/C/Study/c-study/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }
