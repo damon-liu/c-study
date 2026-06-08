@@ -1,0 +1,12 @@
+# 构建产物
+build/
+build_linux/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 临时文件
+-

@@ -1,3 +1,0 @@
-D:/project/damon/C/Study/c-study/build_linux/CMakeFiles/main.dir
-D:/project/damon/C/Study/c-study/build_linux/CMakeFiles/edit_cache.dir
-D:/project/damon/C/Study/c-study/build_linux/CMakeFiles/rebuild_cache.dir

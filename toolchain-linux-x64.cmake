@@ -14,29 +14,24 @@ set(CMAKE_SYSTEM_VERSION 1)
 
 # ============================================
 # Zig 路径查找
-# 优先级: 环境变量 ZIG_PATH > PATH 中的 zig
+# 优先级: CMake -DZIG_PATH=... > 环境变量 ZIG_PATH > PATH
 # ============================================
-# 关键: CMAKE_TRY_COMPILE_PLATFORM_VARIABLES 确保 try_compile 子项目
-#       也能拿到 ZIG_PATH，否则 ABI 检测阶段会找不到编译器
+# try_compile 子项目需要继承 ZIG_PATH，否则 ABI 检测阶段找不到编译器
 list(APPEND CMAKE_TRY_COMPILE_PLATFORM_VARIABLES ZIG_PATH)
 
 if(NOT ZIG_PATH)
     if(DEFINED ENV{ZIG_PATH})
-        set(ZIG_PATH "$ENV{ZIG_PATH}" CACHE FILEPATH "zig.exe 路径")
+        set(ZIG_PATH "$ENV{ZIG_PATH}" CACHE FILEPATH "Zig 编译器路径")
     else()
         find_program(ZIG_PATH zig)
-        if(ZIG_PATH)
-            set(ZIG_PATH "${ZIG_PATH}" CACHE FILEPATH "zig.exe 路径")
-        endif()
     endif()
 endif()
 
 if(NOT ZIG_PATH)
     message(FATAL_ERROR
-        "未找到 zig！请:\n"
-        "  1. 下载: https://ziglang.org/download/\n"
-        "  2. 解压到如 D:/software/c++/lib/zig/\n"
-        "  3. 设置: export ZIG_PATH=D:/software/c++/lib/zig/zig.exe")
+        "未找到 zig 编译器！请设置环境变量:\n"
+        "  export ZIG_PATH=/path/to/zig/zig.exe\n"
+        "或下载: https://ziglang.org/download/")
 endif()
 
 message(STATUS "Zig 编译器: ${ZIG_PATH}")
