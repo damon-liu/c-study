@@ -12,8 +12,10 @@ set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR x86_64)
 set(CMAKE_SYSTEM_VERSION 1)
 
-# Zig 路径
-set(ZIG_PATH "$ENV{ZIG_PATH}" CACHE FILEPATH "zig.exe 的路径")
+# Zig 路径（优先级: -DZIG_PATH= > 环境变量 > PATH 搜索）
+if(NOT ZIG_PATH AND DEFINED ENV{ZIG_PATH})
+    set(ZIG_PATH "$ENV{ZIG_PATH}" CACHE FILEPATH "zig.exe 的路径")
+endif()
 if(NOT ZIG_PATH)
     find_program(ZIG_PATH zig)
 endif()
@@ -52,6 +54,9 @@ set(CMAKE_EXE_LINKER_FLAGS_INIT "${CMAKE_EXE_LINKER_FLAGS_INIT} -static")
 
 # === 交叉编译 ===
 set(CMAKE_CROSSCOMPILING TRUE)
+# 关键：交叉编译时 try_compile 只编译不链接
+# 否则 try_compile 子项目重新加载工具链会丢失 -D 变量，导致找不到编译器
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
