@@ -3,12 +3,9 @@
 # ============================================
 
 services:
-  demo-app:
-    build:
-      context: .      # Dockerfile 所在目录
-      dockerfile: Dockerfile
-    image: demo-cpp-app:latest
-    container_name: demo-cpp-app
+  c-study:
+    image: c-study:v1.0            # 使用服务器上预构建的镜像
+    container_name: c-study
     # 应用执行完即退出，不重启
     restart: "no"
     # 分配伪终端，确保标准输出正常
