@@ -2,8 +2,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QDebug>
-#include <QFileInfo>
-
 DeviceManager::DeviceManager(QObject* parent)
     : QObject(parent)
     , mConfigStore(new ConfigStore(this))
