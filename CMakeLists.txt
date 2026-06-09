@@ -77,3 +77,21 @@ if(MSVC)
 else()
     target_compile_options(DjiOsdMonitor PRIVATE -fexec-charset=UTF-8)
 endif()
+
+# ============================================
+# Windows 部署: windeployqt 自动打包 (可选)
+# 用法: cmake --build . --target deploy
+# ============================================
+if(WIN32)
+    add_custom_target(deploy
+        COMMAND ${CMAKE_COMMAND} -E echo "=== Running windeployqt ==="
+        COMMAND windeployqt
+            --no-translations
+            "$<TARGET_FILE:DjiOsdMonitor>"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_SOURCE_DIR}/src/resources/config.json"
+            "${CMAKE_BINARY_DIR}/config.json"
+        DEPENDS DjiOsdMonitor
+        COMMENT "Deploying Qt DLLs and config for Windows distribution"
+    )
+endif()
