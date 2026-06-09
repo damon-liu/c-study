@@ -1,46 +1,79 @@
-
 # ============================================
-# C-Study 项目构建配置
+# DJI MQTT OSD 监控客户端 构建配置
 # ============================================
-
 cmake_minimum_required(VERSION 3.10)
-project(demo1 VERSION 1.0.0 LANGUAGES CXX)
+project(DjiOsdMonitor VERSION 1.0.0 LANGUAGES CXX)
 
-# C++ 标准
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
-# 默认 Debug 构建（可通过 -DCMAKE_BUILD_TYPE=Release 覆盖）
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 endif()
 
-# ============================================
-# 可执行文件
-# ============================================
-add_executable(main
-    src/hello.cpp
+# 查找 Qt（Qt MQTT 在 Qt 5.12+ 可用）
+find_package(Qt5 COMPONENTS Core Widgets Mqtt REQUIRED)
+
+# 源文件
+set(SOURCES
     src/main.cpp
+    src/core/ConfigStore.cpp
+    src/core/DeviceManager.cpp
+    src/core/TopicManager.cpp
+    src/mqtt/MqttClientManager.cpp
+    src/ui/MainWindow.cpp
+    src/ui/DeviceTreeWidget.cpp
+    src/ui/OsdPanel.cpp
+    src/ui/RawJsonPanel.cpp
+    src/ui/PublishPanel.cpp
+    src/ui/ConfigDialog.cpp
+    src/ui/TopicEditDialog.cpp
 )
 
-# 头文件搜索路径
-target_include_directories(main PRIVATE src)
+set(HEADERS
+    src/core/DeviceInfo.h
+    src/core/OsdData.h
+    src/core/ConfigStore.h
+    src/core/DeviceManager.h
+    src/core/TopicManager.h
+    src/mqtt/MqttClientManager.h
+    src/ui/MainWindow.h
+    src/ui/DeviceTreeWidget.h
+    src/ui/OsdPanel.h
+    src/ui/RawJsonPanel.h
+    src/ui/PublishPanel.h
+    src/ui/ConfigDialog.h
+    src/ui/TopicEditDialog.h
+)
 
-# ============================================
+add_executable(DjiOsdMonitor ${SOURCES} ${HEADERS})
+
+target_include_directories(DjiOsdMonitor PRIVATE
+    src
+    src/core
+    src/mqtt
+    src/ui
+)
+
+target_link_libraries(DjiOsdMonitor
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::Mqtt
+)
+
+# 复制默认配置文件到构建目录
+configure_file(
+    ${CMAKE_SOURCE_DIR}/src/resources/config.json
+    ${CMAKE_BINARY_DIR}/config.json
+    COPYONLY
+)
+
 # 编译器标志
-# ============================================
 if(MSVC)
-    target_compile_options(main PRIVATE /utf-8)
+    target_compile_options(DjiOsdMonitor PRIVATE /utf-8)
 else()
-    target_compile_options(main PRIVATE -fexec-charset=UTF-8)
+    target_compile_options(DjiOsdMonitor PRIVATE -fexec-charset=UTF-8)
 endif()
-
-# ============================================
-# 编译后复制到 deploy/ (用于 Docker 部署)
-# ============================================
-add_custom_command(TARGET main POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "$<TARGET_FILE:main>"
-        "${CMAKE_SOURCE_DIR}/deploy/$<TARGET_FILE_NAME:main>"
-    COMMENT "Copying $<TARGET_FILE_NAME:main> to deploy/"
-)
