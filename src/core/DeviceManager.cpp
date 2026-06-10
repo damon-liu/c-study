@@ -144,14 +144,16 @@ void DeviceManager::updateTopic(const QString& deviceSn,
 }
 
 const AircraftOsd* DeviceManager::latestAircraftOsd(const QString& sn) const {
-    if (mAircraftOsdCache.contains(sn))
-        return &mAircraftOsdCache[sn];
+    auto it = mAircraftOsdCache.find(sn);
+    if (it != mAircraftOsdCache.end())
+        return &*it;
     return nullptr;
 }
 
 const DockOsd* DeviceManager::latestDockOsd(const QString& sn) const {
-    if (mDockOsdCache.contains(sn))
-        return &mDockOsdCache[sn];
+    auto it = mDockOsdCache.find(sn);
+    if (it != mDockOsdCache.end())
+        return &*it;
     return nullptr;
 }
 

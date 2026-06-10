@@ -14,8 +14,8 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 endif()
 
-# 查找 Qt（Qt MQTT 在 Qt 5.12+ 可用）
-find_package(Qt5 COMPONENTS Core Widgets Mqtt REQUIRED)
+# 查找 Qt6
+find_package(Qt6 COMPONENTS Core Widgets Mqtt REQUIRED)
 
 # 源文件
 set(SOURCES
@@ -59,9 +59,9 @@ target_include_directories(DjiOsdMonitor PRIVATE
 )
 
 target_link_libraries(DjiOsdMonitor
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::Mqtt
+    Qt6::Core
+    Qt6::Widgets
+    Qt6::Mqtt
 )
 
 # 复制默认配置文件到构建目录

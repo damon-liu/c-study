@@ -92,8 +92,20 @@ void MqttClientManager::onDisconnected() {
 }
 
 void MqttClientManager::onError(QMqttClient::ClientError error) {
-    Q_UNUSED(error)
-    QString errStr = mClient->errorString();
+    QString errStr;
+    switch (error) {
+    case QMqttClient::NoError:               errStr = QStringLiteral("No error"); break;
+    case QMqttClient::InvalidProtocolVersion: errStr = QStringLiteral("Invalid protocol version"); break;
+    case QMqttClient::IdRejected:             errStr = QStringLiteral("Id rejected"); break;
+    case QMqttClient::ServerUnavailable:     errStr = QStringLiteral("Server unavailable"); break;
+    case QMqttClient::BadUsernameOrPassword: errStr = QStringLiteral("Bad username or password"); break;
+    case QMqttClient::NotAuthorized:         errStr = QStringLiteral("Not authorized"); break;
+    case QMqttClient::TransportInvalid:      errStr = QStringLiteral("Transport invalid"); break;
+    case QMqttClient::ProtocolViolation:     errStr = QStringLiteral("Protocol violation"); break;
+    case QMqttClient::Mqtt5SpecificError:    errStr = QStringLiteral("MQTT 5 specific error"); break;
+    case QMqttClient::UnknownError:
+    default:                                 errStr = QStringLiteral("Unknown error"); break;
+    }
     qWarning() << "MQTT error:" << errStr;
     emit connectionError(errStr);
 }
